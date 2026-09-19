@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>イントロアニメーション デモ | BONNY TRANSPORT</title>
+<style>
+  :root {
+    --orange: #E7692C;
+    --black: #191919;
+    --cream: #FFF8F3;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: var(--cream);
+  }
+
+  /* ---------- Intro splash ---------- */
+  #intro-splash {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 1.4s ease, visibility 1.4s ease;
+  }
+
+  #intro-splash.is-hiding {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  #intro-splash img {
+    width: 260px;
+    max-width: 60vw;
+    height: auto;
+    opacity: 0;
+    transform: translateY(36px);
+    animation: intro-rise 2.6s cubic-bezier(0.16, 0.8, 0.28, 1) 0.3s forwards;
+  }
+
+  @keyframes intro-rise {
+    0%   { opacity: 0; transform: translateY(36px); }
+    60%  { opacity: 1; transform: translateY(-4px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ---------- Placeholder page content (stand-in for the real top page) ---------- */
+  .page-placeholder {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px 24px;
+  }
+
+  .page-placeholder img { width: 220px; margin-bottom: 24px; }
+
+  .page-placeholder h1 {
+    font-size: 22px;
+    color: var(--black);
+    margin-bottom: 8px;
+  }
+
+  .page-placeholder p { color: #59564F; font-size: 15px; margin-bottom: 24px; }
+
+  .replay-btn {
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 14px;
+    color: #fff;
+    background: var(--orange);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 999px;
+    cursor: pointer;
+  }
+
+  .note {
+    margin-top: 40px;
+    font-size: 13px;
+    color: #9a958c;
+    max-width: 440px;
+    line-height: 1.7;
+  }
+</style>
+</head>
+<body>
+
+<!-- Intro splash: only shown once per browser session -->
+<div id="intro-splash">
+  <img src="images/ボニー運送ロゴ.jpeg" alt="BONNY TRANSPORT">
+</div>
+
+<!-- Stand-in for the real トップページ content -->
+<div class="page-placeholder">
+  <img src="images/ボニー運送ロゴ.jpeg" alt="BONNY TRANSPORT">
+  <h1>トップページ（ここに実際のファーストビューが入ります）</h1>
+  <p>イントロアニメーションが終わると、このページがそのまま見えている状態になります。</p>
+  <button class="replay-btn" onclick="sessionStorage.removeItem('bonnyIntroShown'); location.reload();">
+    もう一度アニメーションを見る
+  </button>
+  <p class="note">
+    実装メモ：sessionStorage の bonnyIntroShown フラグで制御しています。<br>
+    初回アクセス時のみ表示され、サイト内を移動している間は再表示されません。<br>
+    タブを閉じて新しく開く、またはブラウザを再起動すると再度表示されます。
+  </p>
+</div>
+
+<script>
+  (function () {
+    var splash = document.getElementById('intro-splash');
+    var alreadyShown = sessionStorage.getItem('bonnyIntroShown');
+
+    if (alreadyShown) {
+      // Skip animation entirely on internal navigation / repeat visits this session
+      splash.style.display = 'none';
+      return;
+    }
+
+    sessionStorage.setItem('bonnyIntroShown', '1');
+
+    // Total on-screen time before fade-out begins (~5s including the rise + hold)
+    var HOLD_UNTIL_FADE = 3600; // ms: rise animation (~2.6s incl. delay) + short hold
+    var FADE_DURATION = 1400;   // ms: matches the CSS transition above
+
+    setTimeout(function () {
+      splash.classList.add('is-hiding');
+      setTimeout(function () {
+        splash.style.display = 'none';
+      }, FADE_DURATION);
+    }, HOLD_UNTIL_FADE);
+  })();
+</script>
+
+</body>
+</html>
