@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>会社概要 | BONNY TRANSPORT（ボニー運送）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@700;900&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --orange: #E7692C;
+    --orange-soft: rgba(231, 105, 44, 0.12);
+    --black: #191919;
+    --cream: #FFF8F3;
+    --gray: #59564F;
+    --border: #EBDED4;
+    --white: #FFFFFF;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: var(--cream);
+    color: var(--black);
+    line-height: 1.6;
+  }
+
+  a { color: inherit; text-decoration: none; }
+  button { font-family: inherit; cursor: pointer; border: none; background: none; }
+  img, svg { display: block; max-width: 100%; }
+
+  /* ---------- Header ---------- */
+  header { position: sticky; top: 0; z-index: 50; background: var(--cream); border-bottom: 1px solid var(--border); }
+  .header-inner { display: flex; align-items: center; justify-content: space-between; padding: 14px 24px; max-width: 1280px; margin: 0 auto; }
+  .logo img { height: 52px; width: auto; }
+  nav.main-nav { display: flex; gap: 26px; }
+  nav.main-nav a { font-weight: 700; font-size: 14px; color: var(--black); white-space: nowrap; transition: color 0.2s ease; }
+  nav.main-nav a:hover { color: var(--orange); }
+  nav.main-nav a.is-active { color: var(--orange); }
+  .nav-toggle { display: none; flex-direction: column; gap: 5px; padding: 8px; }
+  .nav-toggle span { width: 24px; height: 2px; background: var(--black); }
+
+  /* ---------- Title band ---------- */
+  .title-band { position: relative; overflow: hidden; padding: 64px 24px 40px; text-align: center; }
+
+  .title-band::before {
+    content: ""; position: absolute; top: -160px; right: -140px;
+    width: 420px; height: 420px; border-radius: 50%; background: var(--orange-soft);
+  }
+
+  .title-band-inner { position: relative; max-width: 720px; margin: 0 auto; }
+
+  .badge { display: inline-block; background: var(--orange); color: var(--white); font-weight: 700; font-size: 14px; padding: 8px 22px; border-radius: 999px; margin-bottom: 20px; }
+
+  .title-band h1 { font-family: 'Zen Maru Gothic', sans-serif; font-weight: 900; font-size: clamp(30px, 5vw, 46px); margin-bottom: 14px; }
+  .title-band p { color: var(--gray); font-size: 16px; }
+
+  /* ---------- Section shell ---------- */
+  section.block { padding: 24px 24px 56px; }
+
+  /* ---------- Company cards ---------- */
+  .company-card {
+    max-width: 1100px; margin: 0 auto 32px;
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: 28px;
+    padding: 40px;
+    display: flex;
+    align-items: center;
+    gap: 44px;
+  }
+
+  .company-card.reverse { flex-direction: row-reverse; }
+
+  .photo-placeholder {
+    flex-shrink: 0;
+    width: 320px; height: 320px;
+    border-radius: 24px;
+    overflow: hidden;
+    background: var(--orange-soft);
+  }
+
+  .photo-placeholder img { width: 100%; height: 100%; object-fit: cover; }
+
+  .company-text { flex: 1; min-width: 0; }
+
+  .section-tag {
+    display: inline-block;
+    background: var(--orange-soft);
+    color: var(--orange);
+    font-weight: 700;
+    font-size: 13px;
+    padding: 6px 16px;
+    border-radius: 999px;
+    margin-bottom: 16px;
+  }
+
+  .company-text h2 {
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-weight: 700;
+    font-size: 26px;
+    margin-bottom: 18px;
+  }
+
+  .company-text p {
+    color: var(--gray);
+    font-size: 15.5px;
+    line-height: 1.9;
+    white-space: pre-line;
+  }
+
+  .rep-name {
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--black);
+    margin-top: 22px;
+  }
+
+  /* ---------- Footer ---------- */
+  footer { background: var(--black); color: var(--cream); padding: 60px 24px 40px; }
+  .footer-inner { max-width: 1280px; margin: 0 auto; }
+  .footer-top { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 24px; margin-bottom: 44px; }
+  .footer-logo { background: var(--white); border-radius: 12px; padding: 12px; display: inline-flex; }
+  .footer-logo img { height: 50px; width: auto; }
+  .footer-cta { background: var(--orange); color: var(--white); font-weight: 700; font-size: 17px; padding: 14px 30px; border-radius: 999px; }
+  .footer-links { display: flex; gap: 80px; flex-wrap: wrap; margin-bottom: 40px; }
+  .footer-col h3 { font-family: 'Zen Maru Gothic', sans-serif; color: var(--orange); font-size: 18px; margin-bottom: 14px; }
+  .footer-col a { display: block; font-size: 15px; opacity: 0.85; padding: 6px 0; }
+  .footer-col a:hover { opacity: 1; color: var(--orange); }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.15); padding-top: 24px; font-size: 13px; opacity: 0.55; }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 900px) {
+    nav.main-nav { display: none; }
+    .nav-toggle { display: flex; }
+  }
+
+  @media (max-width: 760px) {
+    .company-card, .company-card.reverse { flex-direction: column; text-align: center; padding: 32px 24px; }
+    .photo-placeholder { width: 100%; max-width: 320px; height: 260px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a class="logo" href="index.html" aria-label="BONNY TRANSPORT トップページ">
+      <img src="images/logo.jpg" alt="BONNY TRANSPORT（ボニー運送）">
+    </a>
+    <nav class="main-nav" aria-label="メインナビゲーション">
+      <a href="index.html">引越し</a>
+      <a href="price-simulation.html">価格シミュレーション</a>
+      <a href="moving-cases.html">引越し事例</a>
+      <a href="light-transport.html">軽運送</a>
+      <a href="faq.html">FAQ</a>
+      <a href="#" class="is-active" aria-current="page">会社概要</a>
+    </nav>
+    <button class="nav-toggle" aria-label="メニューを開く"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<section class="title-band">
+  <div class="title-band-inner">
+    <span class="badge">2023年創業、福岡発の運送会社</span>
+    <h1>人と荷物を、まっすぐつなぐ。</h1>
+    <p>BONNY TRANSPORT の会社情報をご紹介します。</p>
+  </div>
+</section>
+
+<section class="block">
+
+  <div class="company-card" id="about">
+    <div class="photo-placeholder">
+      <img src="images/car.jpg" alt="BONNY TRANSPORT 車両">
+    </div>
+    <div class="company-text">
+      <span class="section-tag">ABOUT US</span>
+      <h2>引越し業を基盤とし、運送に関わる事業を福岡中心に展開。</h2>
+      <p>運送業に従事してきた代表の経験と知見をもとに、2023年に創設した新規参入会社。引越しはお客様にとって人生の大事なイベントの一つです。ボニー運送は大手に引けを取らない対応力と丁寧な仕事を活かしてお客様に寄り添ったサービスを提供します。</p>
+    </div>
+  </div>
+
+  <div class="company-card reverse" id="message">
+    <div class="photo-placeholder">
+      <img src="images/representative.jpg" alt="BONNY TRANSPORT 代表 坪口 航大">
+    </div>
+    <div class="company-text">
+      <span class="section-tag">MESSAGE</span>
+      <h2>代表挨拶</h2>
+      <p>「荷物だけでなく、お客様の気持ちごと丁寧にお運びしたい」
+その想いから、BONNY TRANSPORT を立ち上げました。
+
+スタッフ一同、笑顔と誠実さを大切に、これからも地域の皆さまに寄り添うサービスをお届けしてまいります。</p>
+      <div class="rep-name">BONNY TRANSPORT 代表　坪口 航大</div>
+    </div>
+  </div>
+
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-logo"><img src="images/logo.jpg" alt="BONNY TRANSPORT"></div>
+      <a class="footer-cta" href="#">無料お見積もり →</a>
+    </div>
+    <div class="footer-links">
+      <div class="footer-col">
+        <h3>引越し</h3>
+        <a href="index.html#features">ボニー運送の特徴</a>
+        <a href="index.html#pricing">料金目安表</a>
+        <a href="faq.html">FAQ</a>
+        <a href="price-simulation.html">料金シミュレーション</a>
+      </div>
+      <div class="footer-col">
+        <h3>軽運送</h3>
+        <a href="light-transport.html">軽運送とは</a>
+        <a href="light-transport.html">配送品の例</a>
+        <a href="light-transport.html#coverage">対応可能エリア</a>
+        <a href="light-transport.html">送料目安表</a>
+      </div>
+      <div class="footer-col">
+        <h3>会社情報</h3>
+        <a href="#about">会社について</a>
+        <a href="#message">代表挨拶</a>
+      </div>
+    </div>
+    <div class="footer-bottom">© BONNY TRANSPORT All Rights Reserved.</div>
+  </div>
+</footer>
+
+<script>
+  const navToggle = document.querySelector('.nav-toggle');
+  const mainNav = document.querySelector('.main-nav');
+  navToggle.addEventListener('click', () => {
+    const isShown = mainNav.style.display === 'flex';
+    mainNav.style.display = isShown ? 'none' : 'flex';
+    mainNav.style.cssText += isShown ? '' : 'position:absolute; top:100%; left:0; right:0; background:var(--cream); flex-direction:column; padding:16px 24px; border-bottom:1px solid var(--border); gap:16px;';
+  });
+</script>
+
+</body>
+</html>
